@@ -9,7 +9,7 @@ const adminRoute = require('./router/admin-router')
 const feedbackRoute = require('./router/feedback-router');
 const connectDb = require('./utils/db');
 const errorMiddleware = require('./middleware/error-middleware');
-
+const port = process.env.PORT || 4000;
 const corsOptions = {
     origin: "http://localhost:5173",
     methods:"GET, POST, PUT, DELETE, PATCH, HEAD",
@@ -31,7 +31,7 @@ app.use("/api/admin", adminRoute);
 app.use(errorMiddleware)
 
 connectDb().then(() => {
-    app.listen(3000, () => {
+    app.listen(port, () => {
         console.log("Server is running on port 3000");
     })
 })
