@@ -9,7 +9,6 @@ const adminRoute = require('./router/admin-router')
 const feedbackRoute = require('./router/feedback-router');
 const connectDb = require('./utils/db');
 const errorMiddleware = require('./middleware/error-middleware');
-const port = process.env.PORT || 4000;
 const corsOptions = {
     origin: "http://localhost:5173",
     methods:"GET, POST, PUT, DELETE, PATCH, HEAD",
@@ -18,6 +17,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
 
 app.use("/api/auth", authRoute);
 app.use("/api/form", contactRoute);
@@ -29,7 +32,7 @@ app.use("/api/admin", adminRoute);
 
 
 app.use(errorMiddleware)
-
+const port = process.env.PORT||4000;
 connectDb().then(() => {
     app.listen(port, () => {
         console.log("Server is running on port 3000");
