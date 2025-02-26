@@ -11,7 +11,7 @@ const feedbackRoute = require('./router/feedback-router');
 const connectDb = require('./utils/db');
 const errorMiddleware = require('./middleware/error-middleware');
 const corsOptions = {
-    origin: "http://localhost:5173",
+    origin: "https://feedback-collection-system.netlify.app/",
     methods:"GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials:true,
 }
