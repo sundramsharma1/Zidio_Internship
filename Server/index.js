@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 const authRoute = require('./router/auth-router');
 const contactRoute = require('./router/contact-router');
 const serviceRoute = require('./router/service-router');
@@ -33,9 +33,13 @@ app.use("/api/admin", adminRoute);
 
 
 app.use(errorMiddleware)
-connectDb().then(() => {
-    app.listen(port,"0.0.0.0", () => {
-        console.log(`Server is running on port ${port}`);
-    })
-})
+connectDb()
+  .then(() => {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`✅ Server is running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ Database connection failed", err);
+  });
 
