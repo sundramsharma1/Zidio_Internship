@@ -34,8 +34,8 @@ app.use("/api/admin", adminRoute);
 app.use(errorMiddleware)
 const port = process.env.PORT||4000;
 connectDb().then(() => {
-    app.listen(port, () => {
-        console.log("Server is running on port 3000");
+    app.listen(port,"0.0.0.0", () => {
+        console.log(`Server is running on port ${port}`);
     })
 })
 
