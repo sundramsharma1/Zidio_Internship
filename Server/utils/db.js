@@ -1,16 +1,21 @@
-const mongoose = require('mongoose');
-// const URI =  'mongodb://127.0.0.1:27017/mern_admin';
-const URI = process.env.MONGODB_URI;
+const mongoose = require("mongoose");
 
 const connectDb = async () => {
-    try {
-        await mongoose.connect(URI);
-        console.log("database Connected Succcessfully")
-
-    } catch (error) {
-        console.log("Database Not Connected");
-        process.exit(0);
+  try {
+    if (!process.env.MONGODB_URI) {
+      throw new Error("❌ MONGODB_URI is not set in environment variables!");
     }
-}
+
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("✅ Database Connected Successfully");
+  } catch (error) {
+    console.error("❌ Database Connection Failed:", error.message);
+    process.exit(1); // Exit process if DB connection fails
+  }
+};
 
 module.exports = connectDb;
