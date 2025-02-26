@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT;
 const authRoute = require('./router/auth-router');
 const contactRoute = require('./router/contact-router');
 const serviceRoute = require('./router/service-router');
@@ -33,6 +32,7 @@ app.use("/api/admin", adminRoute);
 
 
 app.use(errorMiddleware)
+const PORT = process.env.PORT || 4000;
 connectDb()
   .then(() => {
     app.listen(PORT, "0.0.0.0", () => {
